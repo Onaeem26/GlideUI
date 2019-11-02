@@ -1,6 +1,6 @@
 
 ![](glideuigif.gif)
-##### Longer Video of GlideUI in action: [Twitter] (https://twitter.com/madebyon/status/1190704559846514689)
+##### Watch a longer video of GlideUI in action here on my: [Twitter](https://twitter.com/madebyon/status/1190704559846514689)
 
 # GlideUI
 GlideUI - Get interactive card based UI in your apps.
