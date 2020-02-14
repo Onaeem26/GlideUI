@@ -247,6 +247,11 @@ class Glide : NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate {
                 }
                    
                 showCard.startAnimation()
+                if showCard.isRunning {
+                    if let detectedScrollView = detectScrollView() {
+                        detectedScrollView.panGestureRecognizer.isEnabled = false
+                    }
+                  }
                 break
                 
             case .open:
@@ -423,17 +428,22 @@ class Glide : NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate {
       return fullDimAlpha - fullDimAlpha * ((value - fullDimPosition) / fullDimPosition)
     }
     
+    func detectScrollView() -> UIScrollView? {
+        guard let cardViewController = self.card else { return nil}
+        var detectedScrollView : UIScrollView? = UIScrollView()
+        for subview in cardViewController.view.subviews {
+               if let view = subview as? UIScrollView {
+                   detectedScrollView = view
+               }
+           }
+        return detectedScrollView
+    }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let panGestureRecognzier = gestureRecognizer as? UIPanGestureRecognizer else { return true }
         guard let cardViewController = self.card else { return false}
-        var detectedScrollView = UIScrollView()
-
-        for subview in cardViewController.view.subviews {
-            if let view = subview as? UIScrollView {
-                detectedScrollView = view
-            }
-        }
+     
+        guard let detectedScrollView = detectScrollView() else { return false}
         
         let velocity = panGestureRecognzier.velocity(in: cardViewController.view)
         detectedScrollView.panGestureRecognizer.isEnabled = true

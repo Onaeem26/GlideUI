@@ -46,7 +46,7 @@ extension CardViewController: UITableViewDataSource, UITableViewDelegate {
       }
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath.row + 1)"
+        cell.textLabel?.text = "😀 \(indexPath.row + 1)"
         return cell
       }
     
