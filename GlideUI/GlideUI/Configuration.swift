@@ -9,7 +9,7 @@
 import UIKit
 
 class Configuration: GlideConfiguration {
-    var segmented: Bool = true
+    var segmented: Bool = false
     var segmentHeightDictionary: [State : CGFloat] = [State.open : 700,
                                                       State.compressed : 300,
                                                       State.closed : 0]

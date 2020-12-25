@@ -9,7 +9,7 @@
 import UIKit
 
 class CardViewController: UIViewController, Glideable {
-    var headerHeight: CGFloat = 0
+    var headerHeight: CGFloat = 100
     let tableView = UITableView()
     
     

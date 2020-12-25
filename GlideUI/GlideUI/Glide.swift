@@ -62,9 +62,17 @@ class Glide : NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate {
         blackView.alpha = 0
         window.addSubview(blackView)
         blackView.frame = window.frame
-
+//
         blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapRecognizer)))
+      //
+        
         window.addSubview(cardViewController.view)
+
+        // Then, add the child to the parent
+        parentViewController.addChild(cardViewController)
+
+        // Finally, notify the child that it was moved to a parent
+        cardViewController.didMove(toParent: parentViewController)
         showPopUpIndicator()
         
         
@@ -490,3 +498,23 @@ class Glide : NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate {
     }
 }
 
+
+extension UIViewController {
+    func add(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+
+    func remove() {
+        // Just to be safe, we check that this view controller
+        // is actually added to a parent before removing it.
+        guard parent != nil else {
+            return
+        }
+
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
+}
